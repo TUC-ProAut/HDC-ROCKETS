@@ -1,17 +1,7 @@
 <div align="center">
 <h1 align="center">
 <br />HDC-MiniROCKET</h1>
-<h3>◦ Developed with the software and tools below.</h3>
 
-<p align="center">
-<img src="https://img.shields.io/badge/GNU%20Bash-4EAA25.svg?style&logo=GNU-Bash&logoColor=white" alt="GNU%20Bash" />
-<img src="https://img.shields.io/badge/SciPy-8CAAE6.svg?style&logo=SciPy&logoColor=white" alt="SciPy" />
-<img src="https://img.shields.io/badge/Python-3776AB.svg?style&logo=Python&logoColor=white" alt="Python" />
-<img src="https://img.shields.io/badge/pandas-150458.svg?style&logo=pandas&logoColor=white" alt="pandas" />
-<img src="https://img.shields.io/badge/NumPy-013243.svg?style&logo=NumPy&logoColor=white" alt="NumPy" />
-<img src="https://img.shields.io/badge/Numba-00A3E0.svg?style&logo=Numba&logoColor=white" alt="Numba" />
-<img src="https://img.shields.io/badge/Markdown-000000.svg?style&logo=Markdown&logoColor=white" alt="Markdown" />
-</p>
 </div>
 
 ---
