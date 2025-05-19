@@ -1,6 +1,6 @@
 <div align="center">
 <h1 align="center">
-<br />HDC-MiniROCKET</h1>
+<br />HDC-ROCKETs</h1>
 
 </div>
 
@@ -45,8 +45,6 @@ Code to the paper [1]. The approach is based on the time series classification a
     │   └── defaults.yaml
     ├── create_figures_tables
     │   ├── cd_diagram.py
-    │   ├── compare_with_TST.py
-    │   ├── create_datasize_csv.ipynb
     │   ├── create_eval_data.py
     │   ├── dataset_shapes_UCR_NEW.csv
     │   ├── figure_sec_4_3.py
@@ -54,11 +52,8 @@ Code to the paper [1]. The approach is based on the time series classification a
     │   ├── figures_sec_5_3.py
     │   ├── figures_sec_5_3_example_data.py
     │   ├── figures_sec_5_56.py
-    │   ├── images
     │   ├── plot_config.py
-    │   ├── plot_ramifications.py
-    │   ├── sliding_window.py
-    │   └── tables
+    │   └── plot_ramifications.py
     ├── data
     │   ├── constants.py
     │   └── dataset_utils.py
