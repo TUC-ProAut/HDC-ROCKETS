@@ -22,11 +22,15 @@
 
 ## Overview
 
-Code to the paper [1]. The approach is based on the time series classification algorithm MiniROCKET [2] and extend it with explicit time encoding by HDC.
+Code to the paper [1]. The approach is based on the time series classification algorithm MiniROCKET [2], MultiROCKET [3] and HYDRA [4] and extend it with explicit time encoding by HDC.
 
 [1] ...
 
 [2] A. Dempster, D. F. Schmidt, and G. I. Webb, “MiniRocket: A Very Fast (Almost) Deterministic Transform for Time Series Classification,” Proc. ACM SIGKDD Int. Conf. Knowl. Discov. Data Min., pp. 248–257, 2021.
+
+[3] C. W. Tan, A. Dempster, C. Bergmeir, and G. I. Webb, “MultiRocket: multiple pooling operators and transformations for fast and effective time series classification,” Data Mining and Knowledge Discovery, 2022, doi: 10.1007/s10618-022-00844-1.
+
+[4] A. Dempster, D. F. Schmidt, and G. I. Webb, “Hydra: competing convolutional kernels for fast and accurate time series classification,” Data Mining and Knowledge Discovery, vol. 37, no. 5, pp. 1779–1805, 2023, doi: 10.1007/s10618-023-00939-3.
 
 
 ---
