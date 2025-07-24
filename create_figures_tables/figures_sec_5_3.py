@@ -36,9 +36,9 @@ for kernel in kernels:
     print("--"*20)
     print(f"\nKernel: {kernel}\n")
     # path to the results folder of the original models
-    orig_model_path = "/Users/scken/Nextcloud/project-users/scken/Experimental_Data/HDC-Rockets/results_journal_paper/UCR_NEW/_30_resamples_larger_range/_orig_models"
+    orig_model_path = "../results/UCR/_orig_models"
     # path to the results folder of the HDC models
-    hdc_path = f"/Users/scken/Nextcloud/project-users/scken/Experimental_Data/HDC-Rockets/results_journal_paper/UCR_NEW/_30_resamples_new_run/_{kernel}/"
+    hdc_path = f"../results/UCR/_{kernel}/"
     # path to the results folder of the HDC models
     save_path = os.path.abspath(f"images/{kernel}/")
     save_path_tables = os.path.abspath(f"tables/{kernel}/")
