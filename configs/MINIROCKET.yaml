@@ -1,0 +1,24 @@
+
+defaults:
+  - defaults.yaml
+
+variant: hdc_auto
+
+orig:
+  model: MINIROCKET
+  use_hdc: False
+  predictors_min_max_norm: False
+
+hdc:
+  model: HDC_MINIROCKET
+
+hdc_oracle:
+  model: HDC_MINIROCKET
+  note: 'oracle'
+  multi_scale: True
+  predictors_min_max_norm: False
+
+hdc_auto:
+  model: HDC_MINIROCKET
+  note: 'auto selection based on best score'
+  best_scale: True
