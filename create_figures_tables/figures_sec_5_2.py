@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+from numpy.distutils.command.config import config
+
 pd.DataFrame.iteritems = pd.DataFrame.items # for compatibility with older pandas versions
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,6 +9,7 @@ import seaborn as sns
 import re
 from sklearn.metrics import roc_auc_score
 import matplotlib.patches as mpatches
+import json
 
 from plot_config import mpl
 
@@ -17,7 +20,7 @@ sns.set_style("whitegrid")
 sns.set_context("paper", font_scale=1.5)
 
 # define the folder paths for models
-global_path = "/Users/scken/Nextcloud/project-users/scken/Experimental_Data/HDC-Rockets/results_journal_paper/synthetic/"
+global_path = "../results/synthetic"
 # path to the results folder of the HDC models
 save_path = os.path.abspath(f".")
 
@@ -25,6 +28,20 @@ save_path = os.path.abspath(f".")
 kernel = 'sinc'
 scale = 0
 n_scales = 7
+
+abbreviations = {'MINIROCKET': 'MiniROCKET',
+                 'HDC-MINIROCKET auto': 'HDC-MiniROCKET',
+                 'HDC-MINIROCKET oracle': 'HDC-MiniROCKET oracle',
+                 'MULTIROCKET': 'MultiROCKET',
+                 'HDC-MULTIROCKET auto': 'HDC-MultiROCKET',
+                 'HDC-MULTIROCKET oracle': 'HDC-MultiROCKET oracle',
+                 'HYDRA': 'HYDRA',
+                 'HDC-HYDRA auto': 'HDC-HYDRA',
+                 'HDC-HYDRA oracle': 'HDC-HYDRA oracle',
+                 'MULTIROCKET-HYDRA': 'MultiROCKET-HYDRA',
+                 'HDC-MULTIROCKET-HYDRA auto': 'HDC-MultiROCKET-HYDRA',
+                 'HDC-MULTIROCKET-HYDRA oracle': 'HDC-MultiROCKET-HYDRA oracle',
+                 }
 
 model_paths = []
 # === Load and process model result logs ===
@@ -35,39 +52,29 @@ for folder in os.listdir(global_path):
         print(f"Processing model folder: {folder}")
         model_paths.append(dir)
 
-df = pd.DataFrame(columns=['model', 'dataset', 'acc', 'auc', 'scores'])
+df = pd.DataFrame(columns=['model', 'dataset', 'acc'])
 
 # read the data
 for folder in model_paths:
-    # Extract model name
-    with open(f"{folder}/main_log.log", 'r') as f:
-        log = f.read()
+    # read the json config file
+    with open(os.path.join(folder, "config_log.json"), 'r') as f:
+        config = json.load(f)
 
-    # Handle ensemble model naming
-    model_name = re.findall(r"--- (.*) Model---", log)[0]
-    if model_name.startswith('ENSEMBLE'):
-        # Clean up and normalize model name
-        model_name = re.findall(r"- encoders: (.*)", log)[0]
-        model_name = (model_name.replace('[', '').replace(']', '').
-                      replace("'", '').replace(',', '+').
-                      replace(' ', ''))
+    model_variant = config.get('model', None).replace('_', '-')
+    variant = config.get('variant', None)
+    if 'hdc' in variant:
+        model_variant = f"{model_variant}{variant.split('hdc')[1].replace('_', ' ')}"
+    model_variant = abbreviations[model_variant]
 
-    # cut off parts starting with "synth"
-    model_name = model_name.split(' synth')[0].replace('_', '-')
+    dataset = config.get('dataset', None) + '_hard_case_' + str(config.get('hard_case'))
 
     # Extract dataset and accuracy from log
-    dataset = re.findall(r"- dataset: (.*)", log)[0].replace('_', ' ')
-    acc = float(re.findall(r"Mean acc: (.*)", log)[0])*100
+    # find key with "acc" in it
+    acc_key = next((key for key in config.keys() if 'acc' in key), None)
+    acc = float(config.get(acc_key))*100
 
-    # Load score file and compute AUC
-    score_file = os.listdir(f"{folder}/scores/")[0]
-    scores = pd.read_csv(f"{folder}/scores/{score_file}")
-    scores = scores.rename(columns={scores.columns[0]: 'class_id',
-                                    scores.columns[1]: 'score'})
-    auc = roc_auc_score(scores['class_id'], scores['score'])
-
-    print(f"Appended results for model: {model_name}, dataset: {dataset}, ACC: {acc:.2f}, AUC: {auc:.2f}")
-    df.loc[len(df)] = [model_name, dataset, acc, auc, scores]
+    print(f"Appended results for model: {model_variant}, dataset: {dataset}, ACC: {acc:.2f}")
+    df.loc[len(df)] = [model_variant, dataset, acc]
 
 metrics = ['acc']
 
@@ -75,8 +82,8 @@ metrics = ['acc']
 colors = mpl.rcParams['axes.prop_cycle'].by_key()['color']
 # Define color palette mapping model names to colors
 palette = {
-    'MINIROCKET': colors[0],
-    'HDC-MINIROCKET': colors[0],
+    'MiniROCKET': colors[0],
+    'HDC-MiniROCKET': colors[0],
     'MULTIROCKET': colors[1],
     'HDC-MULTIROCKET': colors[1],
     'HYDRA': colors[2],
@@ -87,8 +94,8 @@ palette = {
 
 # Define hatching patterns for each model
 hatches = {
-    'MINIROCKET': '',
-    'HDC-MINIROCKET': '/',
+    'MiniROCKET': '',
+    'HDC-MiniROCKET': '/',
     'MULTIROCKET': '',
     'HDC-MULTIROCKET': '/',
     'HYDRA': '',
@@ -98,12 +105,12 @@ hatches = {
 }
 # rename synthetic datasets names in the dataframe
 df['dataset'] = df['dataset'].replace({
-    'synthetic': 'Synthetic one peak',
-    'synthetic hard': 'Synthetic one peak hard',
-    'synthetic2': 'Synthetic two peaks',
-    'synthetic2 hard': 'Synthetic two peaks hard',
+    'synthetic1_hard_case_False': 'Synthetic one peak',
+    'synthetic1_hard_case_True': 'Synthetic one peak hard',
+    'synthetic2_hard_case_False': 'Synthetic two peaks',
+    'synthetic2_hard_case_True': 'Synthetic two peaks hard',
                                       })
-sorted_model = ['MINIROCKET', 'HDC-MINIROCKET', 'MULTIROCKET', 'HDC-MULTIROCKET', 'HYDRA', 'HDC-HYDRA', 'MULTIROCKET+HYDRA', 'HDC-MULTIROCKET+HDC-HYDRA']
+sorted_model = ['MiniROCKET', 'HDC-MiniROCKET', 'MULTIROCKET', 'HDC-MULTIROCKET', 'HYDRA', 'HDC-HYDRA', 'MULTIROCKET+HYDRA', 'HDC-MULTIROCKET+HDC-HYDRA']
 sorted_dataset = ['Synthetic one peak', 'Synthetic one peak hard', 'Synthetic two peaks', 'Synthetic two peaks hard']
 
 # Loop over selected metrics (e.g., ACC)
@@ -130,6 +137,9 @@ fig, ax = plt.subplots()
 # Sort models and datasets to maintain consistent plotting order
 ordered_df = pd.DataFrame(columns=['model', 'dataset', metric])
 for model in sorted_model:
+    # check if model is in df
+    if model not in df['model'].values:
+        continue
     for dataset in sorted_dataset:
         ordered_df.loc[len(ordered_df)] = [model, dataset, df[(df['model'] == model) & (df['dataset'] == dataset)][metric].values[0]]
 df = ordered_df
