@@ -1,0 +1,83 @@
+# ===============================
+# 📚 General Configuration File
+# ===============================
+
+# Hydra Configuration
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+# General Note
+note: ''
+
+# ===============================
+# Model Configuration
+# ===============================
+model: MINIROCKET
+
+# ===============================
+# Dataset Configuration
+# ===============================
+dataset: UCR_NEW #UCR, synthetic1, synthetic2
+dataset_path: ~/Datasets
+
+results_path: results/
+run_name: null  # Will be set dynamically unless passed manually
+log_level: INFO
+
+complete_UCR: False        # Use all UCR datasets
+complete_UCR_NEW: False    # Use all UCR_NEW datasets
+complete_UEA: False        # Use all UEA datasets
+dataset_idx: 0            # Index of the ensemble member
+
+hard_case: False      # Use hard case for synthetic datasets
+
+# ===============================
+# General Parameters
+# ===============================
+vsa: MAP
+fpe_method: sinusoid   # FPE: Fractional Power Encoding
+kernels: [sinc]
+scale: 0                  # Scalar encoding scaling with fractional binding
+scale_values: 1         # scaling factor for FPE encoding of sensor values
+multi_scale: False
+best_scale: False
+scales_range: [0, 3, 7]
+n_time_measures: 1
+stat_iterations: 1
+seed: 0
+use_gpu: False
+use_hdc: True
+batch_size: 4
+nan_to_zero: True
+own_folds: True
+classifier: Ridge
+HDC_dim: 9996
+alpha_ranges: [-3, 3, 10]
+seed_for_HDC: True
+seed_for_splits: True
+max_jobs: 64
+
+# ===============================
+# Normalization Parameters
+# ===============================
+normalize_input: True
+predictors_min_max_norm: True
+predictors_z_score_with_mean: True
+predictors_z_score_with_std: True
+predictors_norm: False
+norm_test_individually: False
+
+# ===============================
+# MultiROCKET Parameters
+# ===============================
+multi_dim: 50000
+
+# ===============================
+# Hydra-Specific Parameters
+# ===============================
+predictors_sparse_scaler: False
+HDC_dim_hydra: 20000
+
+
