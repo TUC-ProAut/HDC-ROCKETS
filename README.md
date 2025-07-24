@@ -23,7 +23,7 @@
 
 Code to the paper [1]. The approach is based on the time series classification algorithm MiniROCKET [2], MultiROCKET [3] and HYDRA [4] and extend it with explicit time encoding by HDC.
 
-[1] ...
+[1] K. Schlegel, D. A. Rachkovskij, D. Kleyko, R. W. Gayler, P. Protzel, and P. Neubert, “Structured temporal representation in time series classification with ROCKETs and Hyperdimensional Computing,” 2025.
 
 [2] A. Dempster, D. F. Schmidt, and G. I. Webb, “MiniRocket: A Very Fast (Almost) Deterministic Transform for Time Series Classification,” Proc. ACM SIGKDD Int. Conf. Knowl. Discov. Data Min., pp. 248–257, 2021.
 
