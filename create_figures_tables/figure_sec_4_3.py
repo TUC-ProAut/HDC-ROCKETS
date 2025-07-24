@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from models.hdc_utils import create_pose_matrix
+from models.hdc_utils import create_FPE
 from plot_config import mpl
 
 # Constants
@@ -26,7 +26,8 @@ def process_kernel(kernel, axes, index):
     print(f"Processing kernel: {kernel}...")
     for scale in SCALES:
         # Create pose matrix and compute similarity
-        pose_matrix = create_pose_matrix(N_STEPS, scale, HDC_DIM, seed=0, kernel=kernel,
+        scalars = np.linspace(0, 1, N_STEPS, dtype=np.float32)
+        pose_matrix = create_FPE(scalars, scale, HDC_DIM, seed=0, kernel=kernel,
                                          fpe_method=FPE_METHOD)
         similarity = cosine_similarity(pose_matrix[K_IDX:K_IDX + 1, :], pose_matrix)
         # Plot similarity on the corresponding axis
