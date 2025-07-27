@@ -84,6 +84,49 @@ Code to the paper [1]. The approach is based on the time series classification a
 
 ---
 
+## Parameter Description
+
+The table below provides an overview of the main configuration parameters defined in `configs/defaults.yaml`. These parameters control dataset loading, encoding, model settings, and experimental execution.
+
+| **Category**              | **Parameter**                  | **Description**                                           |
+|---------------------------|--------------------------------|-----------------------------------------------------------|
+| **Dataset and Execution** | `dataset`                      | Dataset name to use (`UCR`, `UCR_NEW`, `synthetic`, etc.) |
+|                           | `dataset_idx`                  | Index of dataset to use (for ensemble-style runs)         |
+|                           | `complete_UCR` / `complete_UCR_NEW` / `complete_UEA` | Whether to run all datasets in the respective collection  |
+|                           | `hard_case`                    | Use challenging version of synthetic dataset              |
+|                           | `dataset_path`                 | Path to dataset folder                                    |
+|                           | `results_path`                 | Path to output results                                    |
+|                           | `run_name`                     | Optional run name (auto-set if null)                      |
+|                           | `log_level`                    | Logging level (e.g., `INFO`)                              |
+| **Model and Encoding**    | `model`                        | Model type to run (`MINIROCKET`, `MULTIROCKET`, etc.)     |
+|                           | `vsa`                          | Vector Symbolic Architecture (`MAP`)                      |
+|                           | `fpe_method`                   | Fractional Power Encoding method (`sinusoid`)             |
+|                           | `scale`                        | Temporal encoding scale value                             |
+|                           | `multi_scale`                  | Run multiple scale values at once                         |
+|                           | `best_scale`                   | Automatically select best scale based on grid search      |
+|                           | `scales_range`                 | List of scale values to evaluate                          |
+|                           | `HDC_dim`                      | Hyperdimensional vector size                              |
+|                           | `alpha_ranges`                 | Alpha range for Ridge Classifier                          |
+|                           | `classifier`                   | Classifier used (`Ridge`)                                 |
+| **Experiment Settings**   | `seed`                         | Random seed for reproducibility                           |
+|                           | `seed_for_HDC`                 | Whether to seed HDC vector generation                     |
+|                           | `seed_for_splits`              | Whether to seed data splits                               |
+|                           | `stat_iterations`              | Number of iterations (e.g., seeds) to evaluate            |
+|                           | `n_time_measures`              | How many times to repeat timing for computational runtime |
+|                           | `batch_size`                   | Evaluation batch size                                     |
+|                           | `max_jobs`                     | Maximum parallel jobs for multiprocessing                 |
+| **Normalization**         | `normalize_input`              | Enable input normalization                                |
+|                           | `predictors_min_max_norm`      | Min-max normalize predictors                              |
+|                           | `predictors_z_score_with_mean` | Apply mean normalization                                  |
+|                           | `predictors_z_score_with_std`  | Apply std normalization                                   |
+|                           | `predictors_norm`              | Apply vector length normalization                         |
+|                           | `norm_test_individually`       | Normalize test samples independently                      |
+| **Model-Specific**        | `multi_dim`                    | Output dimension for MultiROCKET                          |
+|                           | `HDC_dim_hydra`                | Dimensionality used in HYDRA variants                     |
+|                           | `predictors_sparse_scaler`     | Use sparse scaler for predictors (if available)           |
+
+---
+
 
 ---
 

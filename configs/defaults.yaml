@@ -40,18 +40,14 @@ vsa: MAP
 fpe_method: sinusoid   # FPE: Fractional Power Encoding
 kernels: [sinc]
 scale: 0                  # Scalar encoding scaling with fractional binding
-scale_values: 1         # scaling factor for FPE encoding of sensor values
 multi_scale: False
 best_scale: False
 scales_range: [0, 3, 7]
 n_time_measures: 1
 stat_iterations: 1
 seed: 0
-use_gpu: False
-use_hdc: True
 batch_size: 4
 nan_to_zero: True
-own_folds: True
 classifier: Ridge
 HDC_dim: 9996
 alpha_ranges: [-3, 3, 10]
