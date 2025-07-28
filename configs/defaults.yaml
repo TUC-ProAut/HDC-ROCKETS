@@ -24,7 +24,7 @@ dataset_path: ~/Datasets
 
 results_path: results/
 run_name: null  # Will be set dynamically unless passed manually
-log_level: INFO
+log_level: INFO # DEBUG will produce more detailed logs
 
 complete_UCR: False        # Use all UCR datasets
 complete_UCR_NEW: False    # Use all UCR_NEW datasets
