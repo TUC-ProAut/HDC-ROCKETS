@@ -93,7 +93,7 @@ class Model:
                                                                         max_jobs=self.config['max_jobs'],
                                                                         fit_scale=self.config['best_scale'], normalizer=self.predictor_scaler)
         elif self.config['model'] == 'MINIROCKET':
-            self.encoder = MiniRocketMultivariate(random_state=self.config['seed'], use_hdc=False,
+            self.encoder = MiniRocketMultivariate(random_state=self.config['seed'],
                                                              num_features=self.config['HDC_dim'])
 
         elif self.config['model'] == 'MULTIROCKET':

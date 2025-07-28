@@ -282,7 +282,6 @@ def load_synthetic2_dataset(hard_case=False, config=None):
         cfg['n_channels'] = 1
         cfg['kernel'] = 'sinc'
         cfg['scale'] = 0
-        cfg['use_hdc'] = False
         cfg['model'] = 'MULTIROCKET'
         MULTIROCKET = Model(cfg)
         MULTIROCKET.encoder.fit(X,y)

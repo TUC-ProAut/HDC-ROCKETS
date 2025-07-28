@@ -6,7 +6,6 @@ variant: hdc_auto
 
 orig:
   model: MINIROCKET
-  use_hdc: False
   predictors_min_max_norm: False
 
 hdc:

@@ -42,11 +42,10 @@ class MiniRocketMultivariate(_PanelToTabularTransformer):
     """
 
     def __init__(
-        self, num_features=10_000, max_dilations_per_kernel=32, random_state=None, use_hdc=False,vsa='MAP',
+        self, num_features=10_000, max_dilations_per_kernel=32, random_state=None, vsa='MAP',
     ):
         self.name = "MiniRocket"
         self.num_features = num_features
-        self.use_hdc = use_hdc
         self.max_dilations_per_kernel = max_dilations_per_kernel
         self.random_state = (
             np.int32(random_state) if isinstance(random_state, int) else None
@@ -98,17 +97,7 @@ class MiniRocketMultivariate(_PanelToTabularTransformer):
         """
         self.check_is_fitted()
         X = check_X(X, coerce_to_numpy=True).astype(np.float32)
-        if self.use_hdc:
-            if self.vsa == 'MAP':
-                results = _transform_multi_hdc(X, self.parameters, self.poses)
-            elif self.vsa == 'HRR':
-                results = _transform_multi_hrr(X, self.parameters, self.poses)
-            elif self.vsa == 'FHRR':
-                results = _transform_multi_fhrr(X, self.parameters, self.poses)
-            elif self.vsa == 'BSC':
-                results = _transform_multi_bsc(X, self.parameters, self.poses)
-        else:
-            results = _transform_multi(X, self.parameters, self.poses)
+        results = _transform_multi(X, self.parameters, self.poses)
 
         return results
 
