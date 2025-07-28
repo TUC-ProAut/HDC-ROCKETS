@@ -58,8 +58,8 @@ Code to the paper [1]. The approach is based on the time series classification a
     │   ├── figures_sec_5_56.py
     │   ├── plot_config.py
     │   ├── plot_ramifications.py
-    │   ├── tables/         # new: stores LaTeX output
-    │   └── images/         # new: stores plots (e.g., bar plots)
+    │   ├── tables/         
+    │   └── images/         
     ├── data/
     │   ├── constants.py
     │   └── dataset_utils.py
@@ -150,12 +150,13 @@ git clone https://github.com/scken/HDC_ROCKETS.git
 cd HDC_ROCKETS
 ```
 
-1. Install the dependencies: We recommend using a virtual environment to run the code and using Python 3.8.
+1. Install the dependencies: We recommend using mamba (conda) as virtual environment to run the code and using Python 3.10.
 
 ```sh
-python3 -m venv venv
-source venv/bin/activate
-pip3 install -r requirements.txt
+mamba create -n hdc-rockets python=3.10
+mamba activate hdc-rockets
+mamba install numpy=1.26 scipy=1.10.0 pandas=2.0.3 matplotlib seaborn=0.13.2 scikit-learn=1.5.2 sktime=0.34.0 aeon=0.11.1 h5py
+pip install multi-comp-matrix rocket-fft tsai torch-hd pytorch-lightning hydra-core==1.3.2 tables
 ```
 
 
