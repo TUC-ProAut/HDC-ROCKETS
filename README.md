@@ -162,8 +162,22 @@ pip install multi-comp-matrix rocket-fft tsai torch-hd pytorch-lightning hydra-c
 
 ### Download the dataset:
 
-Follow the instructions given in https://tsml-eval.readthedocs.io/en/latest/publications/2023/tsc_bakeoff/tsc_bakeoff_2023.html to download the datasets (112 + 30) and the resample indices. 
-Store all in one folder, e.g. `data/Univariate_ts/`.
+You can download the datasets and resample indices in two ways:
+
+1. **Official TSML Benchmark Repository**  
+   Follow the instructions at https://tsml-eval.readthedocs.io/en/latest/publications/2023/tsc_bakeoff/tsc_bakeoff_2023.html to download the full benchmark datasets (112 + 30) and the corresponding resample indices.
+
+2. **Direct Download from Our Server**  
+   Alternatively, you can download a prepackaged version directly from our cloud server:  
+   [https://tuc.cloud/index.php/s/z5kZKSxose35sdK](https://tuc.cloud/index.php/s/z5kZKSxose35sdK)
+
+```sh
+wget https://tuc.cloud/index.php/s/z5kZKSxose35sdK/download -O dataset.zip
+unzip dataset.zip -d data
+rm dataset.zip
+```
+
+After downloading, extract and store all files in a single folder, e.g., `data/`.
 
 
 ### Running:

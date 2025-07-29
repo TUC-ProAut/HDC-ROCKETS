@@ -20,7 +20,7 @@ model: MINIROCKET
 # Dataset Configuration
 # ===============================
 dataset: UCR_NEW #UCR, synthetic1, synthetic2
-dataset_path: ~/Datasets
+dataset_path: data/datasets/
 
 results_path: results/
 run_name: null  # Will be set dynamically unless passed manually
